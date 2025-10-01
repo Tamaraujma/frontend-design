@@ -1,75 +1,173 @@
 .bento {
-    display: grid;
-    gap: var(--spacing-base);
+  display: grid;
+  gap: var(--spacing-base);
+  /* Add container support and grid template areas */
+  container-type: inline-size;
+  grid-template-areas:
+    "title title"
+    "image-1 image-2"
+    "list tag";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  .title {
+    --bg: var(--color-brand-yellow);
+    grid-area: title;
+    container-type: inline-size;
+  }
 
-    .title {
-        --bg: var(--color-brand-yellow);
-    }
+  .list {
+    --bg: var(--color-brand-coffee);
+    grid-area: list;
+    container-type: inline-size;
+  }
 
-    .list {
-        --bg: var(--color-brand-coffee);
-    }
+  .image-1 {
+    color: var(--color-text-accent);
+    grid-area: image-1;
+    container-type: inline-size;
+  }
 
-    .image-1 {
-        color: var(--color-text-accent);
-    }
+  .image-2 {
+    grid-area: image-2;
+    container-type: inline-size;
+  }
+  .tag {
+    --bg: var(--color-brand-olive);
+    font-size: 2rem;
+    line-height: 1.2;
+    grid-area: tag;
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Media queries for grid layout */
+  @media (min-width: 768px) {
+    grid-template-areas:
+      "title title image-1"
+      "image-2 list image-1"
+      "image-2 tag tag";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+}
+/* Container queries for responsive typography */
+@container (min-width: 300px) {
+  .title h2 {
+    font-size: 2.5rem;
+  }
+  .tag {
+    font-size: 1.2rem;
+  }
+}
+@container (min-width: 501px) {
+  .title h2 {
+    font-size: 4rem;
+  }
+  .tag {
+    font-size: 2rem;
+  }
+}
+/* Container queries for list items */
+@container (min-width: 250px) {
+  .list ul li {
+    font-size: 0.9rem;
+  }
+}
+@container (min-width: 251px) {
+  .list ul li {
+    font-size: 1rem;
+  }
+}
+/* Container queries for image cards */
+@container (max-width: 200px) {
+  .image-1 p {
+    font-size: 0.8rem;
+  }
+}
 
-    .tag {
-        --bg: var(--color-brand-olive);
-        font-size: 2rem;
-        line-height: 1.2;
-    }
+@container (min-width: 201px) {
+  .image-1 p {
+    font-size: 1rem;
+  }
 }
 
 .card {
-    border-radius: var(--border-radius);
-    background: var(--bg);
-    overflow: clip;
+  border-radius: var(--border-radius);
+  background: var(--bg);
+  overflow: clip;
 
-    &:not(:has(img)) {
-        padding: var(--spacing-base);
-    }
+  &:not(:has(img)) {
+    padding: var(--spacing-base);
+  }
 }
 
 h2 {
-    font-size: 4rem;
-    line-height: 1.1;
-    color: var(--color-text-dark);
-    margin-bottom: var(--spacing-base);
+  font-size: 4rem;
+  line-height: 1.1;
+  color: var(--color-text-ligh);
+  margin-bottom: var(--spacing-base);
 }
 
 .website {
-    font-size: 1.2rem;
-    margin-top: auto;
+  font-size: 1.2rem;
+  margin-top: auto;
+}
+/*  Styles for list items */
+.list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
 }
 
+.list ul li {
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: var(--color-text-light);
+}
 
+.list ul li.highlight {
+  color: var(--color-brand-yellow);
+}
+
+/* Image card styling */
+.image-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--color-background-dark); /* Tilføj denne linje */
+}
+
+.image-1 p {
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+}
 
 @layer {
-    :root {
-        /* Brand Colors */
-        --color-brand-yellow: #FFB800;
-        --color-brand-olive: #4A5F32;
-        --color-brand-coffee: #5C3C2E;
+  :root {
+    /* Brand Colors */
+    --color-brand-yellow: #ffb800;
+    --color-brand-olive: #4a5f32;
+    --color-brand-coffee: #5c3c2e;
 
-        /* Background Colors */
-        --color-background-dark: #2C1810;
-        --color-background-primary: var(--color-brand-yellow);
-        --color-background-menu: var(--color-brand-coffee);
-        --color-background-accent: var(--color-brand-olive);
+    /* Background Colors */
+    --color-background-dark: #2c1810;
+    --color-background-primary: var(--color-brand-yellow);
+    --color-background-menu: var(--color-brand-coffee);
+    --color-background-accent: var(--color-brand-olive);
 
-        /* Text Colors */
-        --color-text-dark: var(--color-background-dark);
-        --color-text-light: #FFFFFF;
-        --color-text-accent: var(--color-brand-yellow);
+    /* Text Colors */
+    --color-text-dark: var(--color-background-dark);
+    --color-text-light: #ffffff;
+    --color-text-accent: var(--color-brand-yellow);
 
-        /* Component Colors */
-        --color-logo-icon: var(--color-text-dark);
-        --color-menu-highlight: var(--color-brand-yellow);
+    /* Component Colors */
+    --color-logo-icon: var(--color-text-dark);
+    --color-menu-highlight: var(--color-brand-yellow);
 
-        /* Layout */
-        --border-radius: 24px;
-        --spacing-base: 20px;
-        --spacing-large: 40px;
-    }
+    /* Layout */
+    --border-radius: 24px;
+    --spacing-base: 20px;
+    --spacing-large: 40px;
+  }
 }
