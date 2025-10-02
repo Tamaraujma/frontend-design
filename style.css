@@ -39,6 +39,9 @@ article {
     text-align: center;
     justify-items: center;
   }
+  .actions {
+    flex-direction: column;
+  }
   .actions button {
     inline-size: 100%;
   }
@@ -47,30 +50,45 @@ article {
     padding-inline: 1rem;
   }
 }
+@container article (width >= 550px) and (width <= 768px) {
+  header > div {
+    grid-template-columns: 250px 1fr;
+    align-items: start;
+    gap: 1.5rem;
+  }
+}
+
 @container article (width > 768px) {
-  /* fx grid-template-columns: 300px 1fr */
   grid-template-columns: 300px 1fr;
+  gap: 2rem;
 }
 
 header {
   container: header / inline-size;
   img {
-    aspect-ratio: 1;
     object-fit: cover;
     border-radius: 1rem;
+    inline-size: 100%;
+    aspect-ratio: 1;
+    max-inline-size: 300px;
+    margin-inline: auto;
   }
 
   > div {
     display: grid;
     gap: 1rlh;
     align-items: start;
+    justify-items: center;
   }
 }
 @container header (width >= 550px) {
-  /* fx grid med 250px cover + tekst ved siden af */
   > div {
     grid-template-columns: 250px 1fr;
     align-items: center;
+    justify-items: start;
+  }
+  img {
+    max-inline-size: 250px;
   }
 }
 
@@ -107,6 +125,7 @@ header {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 
   button[data-button] {
     border-radius: 20px;
@@ -117,6 +136,8 @@ header {
     cursor: pointer;
     font-weight: 500;
     inline-size: 100%;
+    flex: 1;
+    min-inline-size: 120px;
 
     &[data-button="secondary"] {
       background: var(--action-secondary);
