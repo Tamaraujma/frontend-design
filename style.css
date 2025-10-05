@@ -124,6 +124,7 @@ h2 {
   padding: 0.5rem;
   border-radius: 8px;
   color: var(--color-text-light);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
 }
 
 .list ul li.highlight {
